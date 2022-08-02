@@ -1,7 +1,17 @@
 from enum import Enum
 from django.db import models
 
-from toilet_app.core.models import CoreModel
+from core.models import CoreModel
+
+class AbstractItem(CoreModel):
+
+    name = models.CharField(max_length=80)
+
+    class Meta:
+        abstract = True
+    
+    def __str__(self) -> str:
+        return self.name
 
 class Toilet(CoreModel):
 
@@ -23,5 +33,5 @@ class Toilet(CoreModel):
     phoneNumber = models.CharField(max_length=11)
     openTime = models.CharField(max_length=140)
     installationDate = models.CharField(max_length=140, null=False)
-    latitude = models.DecimalField(help_text="위도")
-    longitude = models.DecimalField(help_text="경도")
+    latitude = models.DecimalField(help_text="위도", max_digits=500, decimal_places=2)
+    longitude = models.DecimalField(help_text="경도", max_digits=500, decimal_places=2)

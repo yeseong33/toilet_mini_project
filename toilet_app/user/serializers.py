@@ -1,14 +1,13 @@
 from rest_framework import serializers
-from .models import Toilet
+from .models import User
 
-class ToiletSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Toilet
+        model = User
         exclude = ("modified",)
         read_only_fields = ("id", "created", "updated")
-
+    
     def create(self, data):
         request = self.context.get("request")
-        toilet = Toilet.objects.create(**data)
-        return toilet
-        
+        user = User.objects.create(**data)
+        return user
